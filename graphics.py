@@ -3,7 +3,7 @@
 
 import math
 import pygame
-from pygame.locals import *
+import random
 import random
 random.seed()
 
@@ -362,29 +362,29 @@ __last_clic=None
 def __update_event():
     global __arrow,__is_clic,__last_clic
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+        if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
             pygame.quit()
             exit()
 
-        if event.type == KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             dx,dy=0,0
-            if event.key == K_LEFT:
+            if event.key == pygame.K_LEFT:
                 dx=-1
-            if event.key == K_RIGHT:
+            if event.key == pygame.K_RIGHT:
                 dx=+1
-            if event.key == K_DOWN:
+            if event.key == pygame.K_DOWN:
                 dy=-1
-            if event.key == K_UP:
+            if event.key == pygame.K_UP:
                 dy=1
             x,y=__arrow
             __arrow = (x+dx,y+dy)
 
-        if event.type == MOUSEBUTTONDOWN and event.button == __MOUSE_LEFT:
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == __MOUSE_LEFT:
            if not(__CLIC_UP):
                 __is_clic = True
                 __last_clic = pygame.mouse.get_pos()
 
-        if event.type == MOUSEBUTTONUP and event.button == __MOUSE_LEFT:
+        if event.type == pygame.MOUSEBUTTONUP and event.button == __MOUSE_LEFT:
             if __CLIC_UP:
                 __is_clic = True
                 __last_clic = pygame.mouse.get_pos()
@@ -691,10 +691,10 @@ def test_key_code():
 
     while 1:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 exit()
-            if event.type == KEYDOWN :
+            if event.type == pygame.KEYDOWN :
                 for val in dir(pygame):
                     if val[0:2] == 'K_' and getattr(pygame,val) == event.key:
                         print(val)
