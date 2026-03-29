@@ -1,11 +1,12 @@
 
-#############################################
-
 import math
 import pygame
 import random
-import random
+import sys
 random.seed()
+
+# Variable globale pour signaler la fermeture du jeu (compatible Pygbag/WebAssembly)
+__should_quit = False
 
 #################################
 # 1. Types, Variables, Constantes
@@ -87,7 +88,7 @@ def pas_echap():
         sinon quitte l'application
     """
     __update_event()
-    return True
+    return not __should_quit
 
 def attendre_echap():
     """ Attend l'ordre de quitter l'application
@@ -360,11 +361,11 @@ __arrow=(0,0)
 __is_clic=False
 __last_clic=None
 def __update_event():
-    global __arrow,__is_clic,__last_clic
+    global __arrow,__is_clic,__last_clic,__should_quit
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-            pygame.quit()
-            exit()
+            __should_quit = True
+            return
 
         if event.type == pygame.KEYDOWN:
             dx,dy=0,0
@@ -729,7 +730,8 @@ def test_texte():
     affiche_texte_centre("texte au centre",(L//2,H//2),rouge,40)
     attendre_echap()
 
-print("graphics "+__version)
+# Version de la bibliothèque graphics (ne pas afficher au chargement pour compatibilité Pygbag)
+# print("graphics " + __version)
 
 #########################################
 # Annexe : Main
