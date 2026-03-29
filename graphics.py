@@ -286,12 +286,12 @@ def modifie_taille_image(nom_image,nouvelle_largeur,nouvelle_hauteur):
 
 def largeur_texte(texte,taille_police = 15,police = "mono"):
     """ renvoie la largeur du texte à afficher en pixel """
-    myfont = pygame.font.SysFont(police, taille_police)
+    myfont = pygame.font.SysFont(None, taille_police)
     return myfont.size(texte)[0]
 
 def hauteur_texte(texte,taille_police = 15,police = "mono"):
     """ renvoie la hauteur du texte à afficher en pixel """
-    myfont = pygame.font.SysFont(police, taille_police)
+    myfont = pygame.font.SysFont(None, taille_police)
     return myfont.size(texte)[1]
 
 def affiche_texte(texte,position,couleur,taille_police = __POLICE_SIZE,police = __POLICE_NAME):
@@ -301,7 +301,7 @@ def affiche_texte(texte,position,couleur,taille_police = __POLICE_SIZE,police = 
     """
     x,y=position
 
-    myfont = pygame.font.SysFont(police, taille_police,bold=True)
+    myfont = pygame.font.SysFont(None, taille_police,bold=True)
     label = myfont.render(texte, 1, couleur)
 
     position = (x,y+myfont.size(texte)[1])
